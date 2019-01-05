@@ -4,12 +4,73 @@
 // var clicked = this.innerHTML
 //  currentValue.html(clicked)
 //})
+ var isLetter = function(str) {
+        return str.length === 1 && str.match(/[a-z]/i);
+    }
+$(function () {
 
-function number(x){
-document.getElementById("display").value+=x;
-}
 
-function equal(){
-		var x = document.getElementById("display").value;
-		document.getElementById("display").value = eval(x);
-}
+    var posledenKarakter = 0;
+
+    $(".btn").on("click", function () {
+        var segasenKarakter = $(this).text();
+
+
+        console.log(posledenKarakter);
+        if (posledenKarakter == "÷") {
+            if (segasenKarakter == "÷") {
+                alert("dvata se ÷");
+                return;
+            } else {
+                $("#display").val($("#display").val() + $(this).text());
+            }
+        }
+
+
+        if (isNaN(posledenKarakter)) {
+            if (isNaN(segasenKarakter)) {
+                alert("dvata se znaci");
+                return;
+            } else {
+                $("#display").val($("#display").val() + $(this).text());
+
+            }
+        } else {
+            $("#display").val($("#display").val() + $(this).text());
+        }
+
+
+        posledenKarakter = segasenKarakter;
+
+    })
+
+
+    $(".ednakvo").on("click", function () {
+        $("#display").val(eval($("#display").val()))
+
+    })
+
+
+    $("#display").on("keydown", function (event) {
+        console.log(event);
+
+
+        if(isLetter(event.key)){
+            event.preventDefault(true);
+        }
+        else{
+            console.log("NE")
+        }
+
+
+        console.log($("#display").val());
+    })
+    $("#display").on("keypress", function (event) {
+        console.log("keypress");
+        console.log($("#display").val());
+    })
+    $("#display").on("keyup", function (event) {
+        console.log("keyup");
+        console.log($("#display").val());
+    })
+})
