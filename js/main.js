@@ -4,9 +4,9 @@
 // var clicked = this.innerHTML
 //  currentValue.html(clicked)
 //})
- var isLetter = function(str) {
-        return str.length === 1 && str.match(/[a-z]/i);
-    }
+var isLetter = function (str) {
+    return str.length === 1 && str.match(/[a-z]/i);
+}
 $(function () {
 
 
@@ -23,6 +23,8 @@ $(function () {
                 return;
             } else {
                 $("#display").val($("#display").val() + $(this).text());
+                posledenKarakter = segasenKarakter;
+                return;
             }
         }
 
@@ -45,9 +47,14 @@ $(function () {
     })
 
 
-    $(".ednakvo").on("click", function () {
-        $("#display").val(eval($("#display").val()))
 
+    $(".ednakvo").on("click", function () {
+        if (isNaN(posledenKarakter)) {
+            alert("Vnesi Broj!");
+            return;
+        } else {
+            $("#display").val(eval($("#display").val()))
+        }
     })
 
 
@@ -55,22 +62,21 @@ $(function () {
         console.log(event);
 
 
-        if(isLetter(event.key)){
+        if (isLetter(event.key)) {
             event.preventDefault(true);
-        }
-        else{
+        } else {
             console.log("NE")
         }
 
 
         console.log($("#display").val());
     })
-    $("#display").on("keypress", function (event) {
-        console.log("keypress");
-        console.log($("#display").val());
-    })
-    $("#display").on("keyup", function (event) {
-        console.log("keyup");
-        console.log($("#display").val());
-    })
+//    $("#display").on("keypress", function (event) {
+//        console.log("keypress");
+//        console.log($("#display").val());
+//    })
+//    $("#display").on("keyup", function (event) {
+//        console.log("keyup");
+//        console.log($("#display").val());
+//    })
 })
